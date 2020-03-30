@@ -1,15 +1,21 @@
+plugins {
+    id 'java'
+}
+
 allprojects {
     repositories {
         mavenLocal()
         mavenCentral()
-        jcenter() 
+        jcenter()
     }
 }
 
 subprojects {
+
     version = '1.0'
 
     dependencies {
-        implementation "org.slf4j:slf4j-api:$log4jVersion"
+        "org.slf4j:slf4j-api:$log4jVersion"
+        'org.jetbrains:annotations:19.0.0'
     }
 }

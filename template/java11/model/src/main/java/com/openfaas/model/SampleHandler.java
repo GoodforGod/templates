@@ -3,7 +3,11 @@
 
 package com.openfaas.model;
 
+import org.jetbrains.annotations.NotNull;
+
 public class SampleHandler implements IHandler {
+
+    @NotNull
     @Override
     public IResponse Handle(IRequest request) {
         return new Response();

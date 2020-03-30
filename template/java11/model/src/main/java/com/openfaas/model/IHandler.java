@@ -3,7 +3,9 @@
 
 package com.openfaas.model;
 
+import org.jetbrains.annotations.NotNull;
+
 public interface IHandler {
-    IResponse Handle(IRequest request);
+    @NotNull IResponse Handle(IRequest request);
 }
 

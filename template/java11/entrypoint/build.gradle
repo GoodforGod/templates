@@ -9,6 +9,8 @@ dependencies {
     compile project(':function')
 
     compile 'com.google.guava:guava:23.0'
+    compile "org.slf4j:slf4j-api:$log4jVersion"
+    compile 'org.jetbrains:annotations:19.0.0'
 
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$jupiterVersion"
     testImplementation "org.junit.jupiter:junit-jupiter-api:$jupiterVersion"

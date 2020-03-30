@@ -3,19 +3,28 @@
 
 package com.openfaas.model;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Map;
 
 public interface IResponse {
-    String getBody();
-    void setBody(String body);
 
-    String getHeader(String key);
-    void setHeader(String key, String value);
-    Map<String, String> getHeaders();
+    @Nullable String getBody();
 
-    void setContentType(String contentType);
-    String getContentType();
+    @NotNull IResponse setBody(String body);
 
-    void setStatusCode(int code);
+    @Nullable String getHeader(String key);
+
+    @NotNull IResponse setHeader(@NotNull String key, @NotNull String value);
+
+    @NotNull Map<String, String> getHeaders();
+
+    @NotNull IResponse setContentType(String contentType);
+
+    @Nullable String getContentType();
+
+    @NotNull IResponse setStatusCode(int code);
+
     int getStatusCode();
 }
