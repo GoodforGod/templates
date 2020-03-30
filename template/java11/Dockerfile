@@ -1,6 +1,6 @@
 FROM openjdk:11-jdk-slim as builder
 
-ENV GRADLE_VER=6.1.1
+ENV GRADLE_VER=6.3
 RUN apt-get update -qqy \
   && apt-get install -qqy \
    --no-install-recommends \
@@ -20,7 +20,7 @@ ENV PATH=$PATH:$GRADLE_HOME/bin
 
 RUN mkdir -p /home/app/libs
 
-ENV GRADLE_OPTS="-Dorg.gradle.daemon=false"
+ENV GRADLE_OPTS="-Dorg.gradle.daemon=false -Dorg.gradle.parallel -Dorg.gradle.configureondemand"
 WORKDIR /home/app
 
 COPY . /home/app/
@@ -46,6 +46,12 @@ RUN addgroup --system app \
     && adduser --system --ingroup app app
 
 WORKDIR /home/app/
+
+RUN apt-get update -qqy \
+  && apt-get install -qqy \
+   --no-install-recommends \
+   unzip
+
 
 USER app
 

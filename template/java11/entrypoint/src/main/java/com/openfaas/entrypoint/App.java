@@ -12,6 +12,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.net.InetSocketAddress;
 
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import com.sun.net.httpserver.Headers;
@@ -54,12 +55,12 @@ public class App {
                     result.write(buffer, 0, length);
                 }
                 // StandardCharsets.UTF_8.name() > JDK 7
-                requestBody = result.toString("UTF-8");
+                requestBody = result.toString(StandardCharsets.UTF_8);
 	        }
             
             // System.out.println(requestBody);
             Headers reqHeaders = t.getRequestHeaders();
-            Map<String, String> reqHeadersMap = new HashMap<String, String>();
+            Map<String, String> reqHeadersMap = new HashMap<>();
 
             for (Map.Entry<String, java.util.List<String>> header : reqHeaders.entrySet()) {
                 java.util.List<String> headerValues = header.getValue();
@@ -72,15 +73,14 @@ public class App {
             //     System.out.println("Req header " + entry.getKey() + " " + entry.getValue());
             // }
 
-            IRequest req = new Request(requestBody, reqHeadersMap,t.getRequestURI().getRawQuery(), t.getRequestURI().getPath());
-            
-            IResponse res = this.handler.Handle(req);
+            final IRequest req = new Request(requestBody, reqHeadersMap,t.getRequestURI().getRawQuery(), t.getRequestURI().getPath());
+            final IResponse res = this.handler.Handle(req);
 
-            String response = res.getBody();
-            byte[] bytesOut = response.getBytes("UTF-8");
+            final String response = res.getBody();
+            byte[] bytesOut = response.getBytes(StandardCharsets.UTF_8);
 
-            Headers responseHeaders = t.getResponseHeaders();
-            String contentType = res.getContentType();
+            final Headers responseHeaders = t.getResponseHeaders();
+            final String contentType = res.getContentType();
             if(contentType.length() > 0) {
                 responseHeaders.set("Content-Type", contentType);
             }
@@ -95,8 +95,7 @@ public class App {
             os.write(bytesOut);
             os.close();
 
-            System.out.println("Request / " + Integer.toString(bytesOut.length) +" bytes written.");
+            System.out.println("Request / " + bytesOut.length +" bytes written.");
         }
     }
-
 }

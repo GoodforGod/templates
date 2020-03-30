@@ -1,13 +1,13 @@
-import org.junit.Test;
-import static org.junit.Assert.*;
-
 import com.openfaas.function.Handler;
+import org.junit.jupiter.api.Test;
 
-public class HandlerTest {
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-    @Test public void handlerIsNotNull() {
-        Handler handler = new Handler();
-        assertTrue("Expected handler not to be null", handler != null);
+class HandlerTest {
+
+    @Test
+    void handlerIsNotNull() {
+        final Handler handler = new Handler();
+        assertNotNull(handler, "Expected handler not to be null");
     }
-
 }
