@@ -2,7 +2,7 @@
 
 The Java11 template uses gradle as a build system.
 
-Gradle version: 
+Gradle version: 6.3
 
 ### Structure
 

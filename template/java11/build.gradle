@@ -14,8 +14,4 @@ subprojects {
 
     version = '1.0'
 
-    dependencies {
-        "org.slf4j:slf4j-api:$log4jVersion"
-        'org.jetbrains:annotations:19.0.0'
-    }
 }

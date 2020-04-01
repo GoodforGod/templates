@@ -1,8 +1,8 @@
-FROM openjdk:11-jdk-slim as builder
+FROM adoptopenjdk/openjdk11:alpine-slim as builder
 
 ENV GRADLE_VER=6.3
-RUN apt-get update -qqy \
-  && apt-get install -qqy \
+RUN apk update -qqy \
+  && apk install -qqy \
    --no-install-recommends \
    curl \
    ca-certificates \
@@ -29,9 +29,9 @@ RUN gradle build
 RUN find . 
 
 FROM openfaas/of-watchdog:0.7.6 as watchdog
-FROM openjdk:11-jre-slim as ship
-RUN apt-get update -qqy \
-  && apt-get install -qqy \
+FROM adoptopenjdk/openjdk11:alpine-jre as ship
+RUN apk update -qqy \
+  && apk install -qqy \
    --no-install-recommends \
    unzip
 
@@ -46,12 +46,6 @@ RUN addgroup --system app \
     && adduser --system --ingroup app app
 
 WORKDIR /home/app/
-
-RUN apt-get update -qqy \
-  && apt-get install -qqy \
-   --no-install-recommends \
-   unzip
-
 
 USER app
 
